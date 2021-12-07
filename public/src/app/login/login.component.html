@@ -1,0 +1,18 @@
+        <form (submit)="login($event)" class="col s12">
+            <h3>Login</h3>
+            <p class="error" *ngIf="newError">{{error}}</p>
+            <div class="input-field">
+                <p class="error" *ngIf="!email.valid">Please enter a valid email</p>
+                <input name="email" id="email" type="email" class="validate" [(ngModel)]="user.email" required #email="ngModel" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                <label for="email" class="active">Email</label>
+            </div>
+            <div class="input-field">
+                <p class="error" *ngIf="!password.valid">Please enter a valid password</p>
+                <input name="password" type="password" class="validate" [(ngModel)]="user.password" required #password="ngModel">
+                <label for="password" class="active">Password</label>
+            </div>
+
+            <div class="center">
+                <input type="submit" class="btn blue" value="Login" />
+            </div>
+        </form>

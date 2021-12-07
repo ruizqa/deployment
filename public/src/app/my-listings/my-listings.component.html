@@ -1,0 +1,106 @@
+<div class="container section" *ngIf="ready">
+    <div class="row">
+        <a class="col s2" [routerLink]="['/browse']">Browse</a>
+        <a class="col s2" [routerLink]="['/listings']">Listings</a>
+        <a id= "logout" class="col s2" (click)="logout()">Logout</a>
+    </div>
+    <div class="row">
+      <form (submit)="create($event)" enctype="multipart/form-data">
+        <div class="col s12">
+           <div class="col s4">
+
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+                (change)="OnNewImageSelect($event)">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" id="fileName" [value]="fileName">
+              </div>
+            </div>
+           </div>
+           <div class="col s4">
+                  <p *ngIf = "newError">{{error}}</p>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!title.valid">Please enter a valid title</p>
+                      <input name="title" id="title" type="text" class="validate" [(ngModel)]="bike.title" required #title="ngModel">
+                      <label for="title" class="active">Title</label>
+                  </div>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!description.valid">Please enter a valid description</p>
+                      <textarea class="materialize-textarea" name="description" id="description" type="text" [(ngModel)]="bike.description" required #description="ngModel" maxlength="200"></textarea>
+                      <label for="description" class="active">Description</label>
+                  </div>
+            
+           </div>
+           <div class="col s4">
+             
+                  <div class="input-field">
+                      <p class="error" *ngIf="!price.valid">Please enter a valid price</p>
+                      <input name="price" id="price" type="number" class="validate" [(ngModel)]="bike.price" required #price="ngModel" min="1">
+                      <label for="price" class="active">Price</label>
+                  </div>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!location.valid">Please enter a valid location</p>
+                      <input name="location" id="location" type="text" class="validate" [(ngModel)]="bike.location" required #location="ngModel">
+                      <label for="location" class="active">Location</label>
+                  </div>
+                  <div class="input-field center">
+                    <input type="submit" class="btn green" value="Create" />
+                </div>
+           </div>
+        </div>
+      </form>
+    </div>
+    <div   *ngFor="let bike of myBikes; let i = index" class="row">
+      <form (submit)="update($event)" [name]="bike.id">
+        <div class="col s12">
+           <div class="col s4">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file" class="custom-file-input" id="customFile" name="image"
+                (change)="OnEditImageSelect($event,i)">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" id="fileName" [value]="bike.editfileName">
+              </div>
+            </div>
+            <img [src]="bike.filename">
+           </div>
+           <div class="col s4">
+                  <p class="error" *ngIf = "editError[i]">{{errors[i]}}</p>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!title.valid">Please enter a valid title</p>
+                      <input name="title" id="title" type="text" class="validate" [(ngModel)]="myBikes[i].title" required #title="ngModel">
+                      <label for="title" class="active">Title</label>
+                  </div>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!description.valid">Please enter a valid description</p>
+                      <textarea class="materialize-textarea" name="description" id="description" type="text" [(ngModel)]="myBikes[i].description" required #description="ngModel" maxlength="200"></textarea>
+                      <label for="description" class="active">Description</label>
+                  </div>
+            
+           </div>
+           <div class="col s4">
+             
+                  <div class="input-field">
+                      <p class="error" *ngIf="!price.valid">Please enter a valid price</p>
+                      <input name="price" id="price" type="number" class="validate" [(ngModel)]="myBikes[i].price" required #price="ngModel" min="1">
+                      <label for="price" class="active">Price</label>
+                  </div>
+                  <div class="input-field">
+                      <p class="error" *ngIf="!location.valid">Please enter a valid location</p>
+                      <input name="location" id="location" type="text" class="validate" [(ngModel)]="myBikes[i].location" required #location="ngModel">
+                      <label for="location" class="active">Location</label>
+                  </div>
+                  <div class="input-field center">
+                    <input type="submit" class="btn green" value="Edit" />
+                </div>
+           </div>
+        </div>
+      </form>
+    </div>
+    
+</div>

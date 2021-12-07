@@ -1,0 +1,13 @@
+.error{
+    font-size: 0.75em;
+    color:red;
+}
+
+#logout{
+    cursor: pointer;
+}
+
+
+img{
+    max-height:200px;
+}

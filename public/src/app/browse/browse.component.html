@@ -1,0 +1,63 @@
+
+  <div class="container section" >
+      <div class="row">
+          <a class="col s2" [routerLink]="['/browse']">Browse</a>
+          <a class="col s2" [routerLink]="['/listings']">Listings</a>
+          <a id= "logout" class="col s2" (click)="logout()">Logout</a>
+      </div>
+      <div class="row">
+          <div class="col s12 l6">
+            <label for="searchInput" class="active">Search:</label>
+            <input type="text" name="searchInput" (keyup)="query($event)">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+              <div *ngFor="let bike of bikesAll">
+
+                <div class="card col m6">
+                  <div class="card-image">
+                    <img [src]="bike.filename">
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title black-text center">Bike {{bike['id']}}: {{bike['title']}}</span>
+                    <p class="center">Description: {{bike['description']}}</p>
+                    <p class="center">Price: {{bike['price']}}</p>
+                    <p class="center">Location: {{(bike['location'])}}</p>
+                  </div>
+                  <div class="card-action center">
+                    <a ><button *ngIf="userEmail != bike['owner_id']" [name]="bike['id']" class="btn blue" (click) = "getContact($event)" >Contact</button></a>
+                      <a><button *ngIf="userEmail == bike['owner_id']"  [name]="bike['id']" class="btn red" (click) = "delete($event)">Delete</button></a>
+                  </div>
+                </div>
+
+
+
+
+
+<!--                   <div class="card grey">
+                    <div class="card-content white-text">
+                      <span class="card-title">Bike {{bike['id']}}: {{bike['title']}}</span>
+                        <p>Description: {{bike['description']}}</p>
+                        <p>Price: {{bike['price']}}</p>
+                        <p>Location: {{(bike['location'])}}</p>
+                        <img [src]="bike.filename">
+                    </div>
+                    <div class="card-action height">
+                      <a ><button *ngIf="userEmail != bike['owner_id']" [name]="bike['id']" class="btn blue" (click) = "getContact($event)" >Contact</button></a>
+                      <a><button *ngIf="userEmail == bike['owner_id']"  [name]="bike['id']" class="btn red" (click) = "delete($event)">Delete</button></a>
+                    </div>
+                    <br>
+                  </div> -->
+      
+              </div>
+          </div>
+      </div>
+  </div>
+<jw-modal id="contactInfo">
+  <p>Name: {{contact['firstName']}} {{contact['lastName']}}</p>
+  <p>Email: {{contact['email']}}</p>
+  <p><button class="btn green" (click)="modalService.close('contactInfo')">Close</button></p>
+</jw-modal>
+
+

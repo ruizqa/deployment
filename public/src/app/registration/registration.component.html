@@ -1,0 +1,35 @@
+<form (submit)="register($event)" class="col s12">
+    <h3>Registration</h3>
+    <div *ngIf="newError">
+        <p class="error">{{error}}</p>
+    </div>
+    <div class="input-field">
+        <p class="error" *ngIf="!firstName.valid">Please enter a valid first name</p>
+        <input name="firstName" id="firstName" type="text" class="validate" [(ngModel)]="regUser.firstName" required #firstName="ngModel">
+        <label for="firstName" class="active">First Name</label>
+    </div>
+    <div class="input-field">
+        <p class="error" *ngIf="!lastName.valid">Please enter a valid last name</p>
+        <input name="lastName" id="lastName" type="text" class="validate" [(ngModel)]="regUser.lastName" required #lastName="ngModel">
+        <label for="lastName" class="active">Last Name:</label>
+    </div>
+    <div class="input-field">
+        <p class="error" *ngIf="!email.valid">Please enter a valid email</p>
+        <input name="loginEmail" id="loginEmail" type="email" class="validate" [(ngModel)]="regUser.email" required #email="ngModel" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+        <label for="loginEmail" class="active">Email</label>
+    </div>
+    <div class="input-field">
+        <p class="error" *ngIf="!password.valid">Please enter a valid password</p>
+        <input name="loginPassword" type="password" class="validate" [(ngModel)]="regUser.password" required #password="ngModel">
+        <label for="password" class="active">Password</label>
+    </div>
+    <div class="input-field">
+        <p class="error" *ngIf="!cpassword.valid || regUser.cpassword != regUser.password">Please confirm your password</p>
+        <input name="cpassword" type="password" class="validate" [(ngModel)]="regUser.cpassword" required #cpassword="ngModel">
+        <label for="cpassword" class="active">Password Confirmation</label>
+    </div>
+
+    <div class="center">
+        <input type="submit" class="btn teal" value="Register" />
+    </div>
+</form>

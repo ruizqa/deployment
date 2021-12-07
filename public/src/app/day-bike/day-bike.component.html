@@ -1,0 +1,19 @@
+<div class="container section">
+    <div class="row">
+        <div *ngIf="!show" class="card col s12 m6 offset-m3">
+            <h1>Welcome new user!</h1>
+            <p>This space will be populated with the bike of the day as soon as we have some</p>
+        </div>
+        <div *ngIf="show" class="card col s12 m6 offset-m3">
+            <div class="card-image">
+              <img [src]="bike['filename']">
+            </div>
+            <div class="card-content">
+              <span class="card-title black-text center">Bike of the day: {{bike['title']}}</span>
+              <p class="center">Description: {{bike['description']}}</p>
+              <p class="center">Price: {{bike['price']}}</p>
+              <p class="center">Location: {{(bike['location'])}}</p>
+            </div>
+        </div>
+    </div>
+</div>
